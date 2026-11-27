@@ -1,0 +1,31 @@
+<!doctype html>
+<!-- Source for social-preview.png (1280x640): GitHub social preview and the site's og:image -->
+<html><head><meta charset="utf-8">
+<link href="https://fonts.googleapis.com/css2?family=Tektur:wght@500;700&display=block" rel="stylesheet">
+<style>
+  html, body { margin: 0; width: 1280px; height: 640px; overflow: hidden; }
+  body {
+    background: linear-gradient(180deg, #4d0f24, #320b18 45%, #0b060a);
+    font-family: 'Tektur', sans-serif; color: #e6dde0;
+    display: flex; align-items: center; justify-content: center; gap: 64px;
+    position: relative;
+  }
+  body::before { content: ''; position: absolute; inset: 28px; border: 3px solid #a63a45; }
+  .bar { position: absolute; height: 8px; }
+  img { width: 300px; height: 300px; filter: drop-shadow(0 0 40px rgb(63 224 192 / 0.35)); }
+  h1 { margin: 0; font-size: 120px; font-weight: 700; font-style: italic; letter-spacing: 0.02em; line-height: 1; }
+  .t { color: #ff6b5a; } .f { color: #50d8e0; }
+  p { margin: 22px 0 0; font-size: 34px; font-weight: 500; color: #c9b8be; }
+  .tag { margin-top: 26px; font-size: 22px; letter-spacing: 0.25em; color: #a63a45; text-transform: uppercase; }
+</style></head>
+<body>
+  <div class="bar" style="left:60px; top:60px; width:120px; background:#ff6b5a"></div>
+  <div class="bar" style="right:60px; bottom:60px; width:90px; background:#a63a45"></div>
+  <div class="bar" style="right:160px; bottom:60px; width:28px; background:#f3e600"></div>
+  <img src="icon-256.png" alt="">
+  <div>
+    <h1><span class="t">Toxic</span><span class="f">Frame</span></h1>
+    <p>Free, open-source Warframe companion</p>
+    <div class="tag">Inventory · Relics · Rivens · Trading</div>
+  </div>
+</body></html>
