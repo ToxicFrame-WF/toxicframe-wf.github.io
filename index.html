@@ -8,7 +8,7 @@
   <link rel="icon" type="image/png" href="icon-64.png">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Rajdhani:wght@500;700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Tektur:wght@500;700&display=swap" rel="stylesheet">
   <style>
     :root {
       --bg: #0b060a;
@@ -21,7 +21,7 @@
       --yellow: #f3e600;
       --text: #e6dde0;
       --muted: #a8949b;
-      --head: 'Bahnschrift', 'Rajdhani', 'Segoe UI', sans-serif;
+      --head: 'Tektur', 'Bahnschrift', 'Segoe UI', sans-serif;
     }
     * { box-sizing: border-box; }
     html { scroll-behavior: smooth; }
@@ -51,7 +51,9 @@
       font-size: 14px; color: var(--red); text-decoration: none;
     }
     nav .links a:hover { color: var(--cyan-hi); }
-    .word { font-family: var(--head); font-weight: 700; letter-spacing: 0.18em; text-transform: uppercase; }
+    .word { font-family: var(--head); font-weight: 700; letter-spacing: 0.04em; }
+    h2.word { letter-spacing: 0.16em; text-transform: uppercase; }
+    .wm { font-style: italic; padding-right: 0.08em; } /* the ToxicFrame wordmark only */
     .word .t { color: var(--red); }
     .word .f { color: var(--cyan); }
 
@@ -72,7 +74,7 @@
     }
     .btn {
       display: inline-block; padding: 14px 28px;
-      font-family: var(--head); font-weight: 700; letter-spacing: 0.15em; text-transform: uppercase;
+      font-family: var(--head); font-weight: 700; letter-spacing: 0.06em;
       text-decoration: none; color: #0b060a; background: var(--cyan);
       clip-path: polygon(12px 0, 100% 0, 100% calc(100% - 12px), calc(100% - 12px) 100%, 0 100%, 0 12px);
     }
@@ -121,7 +123,7 @@
 <body>
   <nav>
     <div class="wrap">
-      <a class="brand word" href="#"><img src="icon-64.png" alt=""><span><span class="t">Toxic</span><span class="f">Frame</span></span></a>
+      <a class="brand word" href="#"><img src="icon-64.png" alt=""><span class="wm"><span class="t">Toxic</span><span class="f">Frame</span></span></a>
       <div class="links">
         <a href="#features">Features</a>
         <a href="#safe">Safety</a>
@@ -133,7 +135,7 @@
   <header class="hero">
     <div class="wrap">
       <img src="icon-256.png" alt="ToxicFrame logo">
-      <h1 class="word"><span class="t">Toxic</span><span class="f">Frame</span></h1>
+      <h1 class="word"><span class="wm"><span class="t">Toxic</span><span class="f">Frame</span></span></h1>
       <span class="badge">BETA</span>
       <p class="tag">A free, open-source Warframe companion for Windows. Your inventory, relics, mastery, rivens and warframe.market trading in one place.</p>
       <div class="actions">
@@ -155,7 +157,7 @@
         <div class="card"><h3>Trading</h3><p>warframe.market prices, your orders, and an automatic trade log with profit stats.</p></div>
         <div class="card"><h3>Arbitrations</h3><p>Schedule with community tier grades, alerts for good nodes and live run tracking.</p></div>
         <div class="card"><h3>World timers</h3><p>Open-world cycles, Baro Ki'Teer, Steel Path incursions and weekly resets.</p></div>
-        <div class="card"><h3>Night City look</h3><p>A cyberpunk-style interface, or a classic sidebar layout if you prefer.</p></div>
+        <div class="card"><h3>Neo-Toxik style</h3><p>A cyberpunk-style interface in crimson and toxic cyan.</p></div>
       </div>
     </div>
   </section>
