@@ -1,0 +1,197 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>ToxicFrame</title>
+  <meta name="description" content="ToxicFrame is a free, open-source Warframe companion app for Windows: inventory, relics, mastery, rivens, Arbitrations and warframe.market trading.">
+  <link rel="icon" type="image/png" href="icon-64.png">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Rajdhani:wght@500;700&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --bg: #0b060a;
+      --panel-top: #4d0f24;
+      --panel-mid: #320b18;
+      --line: #a63a45;
+      --red: #ff6b5a;
+      --cyan: #50d8e0;
+      --cyan-hi: #5ef6ff;
+      --yellow: #f3e600;
+      --text: #e6dde0;
+      --muted: #a8949b;
+      --head: 'Bahnschrift', 'Rajdhani', 'Segoe UI', sans-serif;
+    }
+    * { box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+    body {
+      margin: 0;
+      background: var(--bg);
+      color: var(--text);
+      font: 16px/1.6 system-ui, 'Segoe UI', sans-serif;
+    }
+    a { color: var(--cyan); }
+    a:hover { color: var(--cyan-hi); }
+    .wrap { max-width: 1040px; margin: 0 auto; padding: 0 20px; }
+
+    /* top bar */
+    nav {
+      border-bottom: 1px solid rgb(166 58 69 / 0.45);
+      background: rgb(14 5 6 / 0.7);
+      position: sticky; top: 0; z-index: 5;
+      backdrop-filter: blur(6px);
+    }
+    nav .wrap { display: flex; align-items: center; gap: 24px; height: 56px; }
+    nav .brand { display: flex; align-items: center; gap: 10px; text-decoration: none; }
+    nav .brand img { width: 28px; height: 28px; }
+    nav .links { margin-left: auto; display: flex; gap: 22px; }
+    nav .links a {
+      font-family: var(--head); font-weight: 700; letter-spacing: 0.12em; text-transform: uppercase;
+      font-size: 14px; color: var(--red); text-decoration: none;
+    }
+    nav .links a:hover { color: var(--cyan-hi); }
+    .word { font-family: var(--head); font-weight: 700; letter-spacing: 0.18em; text-transform: uppercase; }
+    .word .t { color: var(--red); }
+    .word .f { color: var(--cyan); }
+
+    /* hero */
+    header.hero {
+      background: linear-gradient(180deg, var(--panel-top), var(--panel-mid) 45%, var(--bg));
+      border-bottom: 1px solid var(--line);
+      padding: 72px 0 80px;
+      text-align: center;
+    }
+    .hero img { width: 128px; height: 128px; filter: drop-shadow(0 0 24px rgb(63 224 192 / 0.35)); }
+    .hero h1 { margin: 18px 0 6px; font-size: clamp(40px, 8vw, 72px); line-height: 1; }
+    .hero .tag { color: var(--muted); font-size: 18px; max-width: 560px; margin: 14px auto 32px; }
+    .badge {
+      display: inline-block; border: 1px solid var(--yellow); color: var(--yellow);
+      font-family: var(--head); font-weight: 700; letter-spacing: 0.15em; font-size: 12px;
+      padding: 2px 8px; vertical-align: middle;
+    }
+    .btn {
+      display: inline-block; padding: 14px 28px;
+      font-family: var(--head); font-weight: 700; letter-spacing: 0.15em; text-transform: uppercase;
+      text-decoration: none; color: #0b060a; background: var(--cyan);
+      clip-path: polygon(12px 0, 100% 0, 100% calc(100% - 12px), calc(100% - 12px) 100%, 0 100%, 0 12px);
+    }
+    .btn:hover { background: var(--cyan-hi); color: #0b060a; }
+    .btn.ghost { background: transparent; color: var(--red); box-shadow: inset 0 0 0 1px var(--line); clip-path: none; }
+    .btn.ghost:hover { color: var(--cyan-hi); }
+    .hero .actions { display: flex; gap: 14px; justify-content: center; flex-wrap: wrap; }
+    .hero .note { margin-top: 14px; font-size: 13px; color: var(--muted); }
+
+    /* sections */
+    section { padding: 64px 0; border-bottom: 1px solid rgb(166 58 69 / 0.3); }
+    h2 { font-size: 28px; margin: 0 0 28px; }
+    h2 .sub { color: var(--cyan); margin-left: 14px; }
+    .grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 16px; }
+    .card {
+      background: linear-gradient(180deg, rgb(77 15 36 / 0.55), rgb(14 5 6 / 0.6));
+      border: 1px solid rgb(166 58 69 / 0.45);
+      padding: 18px 20px;
+      position: relative;
+    }
+    .card::before {
+      content: ''; position: absolute; left: -1px; top: -1px; width: 14px; height: 14px;
+      border-left: 2px solid var(--line); border-top: 2px solid var(--line);
+    }
+    .card h3 {
+      margin: 0 0 6px; font-family: var(--head); font-weight: 700; letter-spacing: 0.1em;
+      text-transform: uppercase; font-size: 15px; color: var(--cyan);
+    }
+    .card p { margin: 0; color: var(--muted); font-size: 15px; }
+    ul.safe { list-style: none; padding: 0; margin: 0; display: grid; gap: 12px; }
+    ul.safe li {
+      border-left: 2px solid var(--line); padding: 4px 0 4px 16px; color: var(--muted);
+    }
+    ul.safe b { color: var(--text); }
+    .warn { margin-top: 24px; color: var(--muted); font-size: 15px; }
+    .warn b { color: var(--yellow); }
+    footer { padding: 36px 0 48px; color: var(--muted); font-size: 14px; }
+    footer .row { display: flex; gap: 24px; flex-wrap: wrap; justify-content: space-between; }
+    @media (max-width: 640px) {
+      nav .links { gap: 14px; }
+      nav .links a { font-size: 12px; }
+      .hero { padding: 48px 0 56px; }
+    }
+  </style>
+</head>
+<body>
+  <nav>
+    <div class="wrap">
+      <a class="brand word" href="#"><img src="icon-64.png" alt=""><span><span class="t">Toxic</span><span class="f">Frame</span></span></a>
+      <div class="links">
+        <a href="#features">Features</a>
+        <a href="#safe">Safety</a>
+        <a href="https://github.com/2Toxic4uu/ToxicFrame">GitHub</a>
+      </div>
+    </div>
+  </nav>
+
+  <header class="hero">
+    <div class="wrap">
+      <img src="icon-256.png" alt="ToxicFrame logo">
+      <h1 class="word"><span class="t">Toxic</span><span class="f">Frame</span></h1>
+      <span class="badge">BETA</span>
+      <p class="tag">A free, open-source Warframe companion for Windows. Your inventory, relics, mastery, rivens and warframe.market trading in one place.</p>
+      <div class="actions">
+        <a class="btn" href="https://github.com/2Toxic4uu/ToxicFrame/releases">Download for Windows</a>
+        <a class="btn ghost" href="https://github.com/2Toxic4uu/ToxicFrame">Source code</a>
+      </div>
+      <p class="note">Linux is planned. The installer is not code-signed yet, so Windows may warn you: click "More info", then "Run anyway".</p>
+    </div>
+  </header>
+
+  <section id="features">
+    <div class="wrap">
+      <h2 class="word"><span class="t">Features</span><span class="sub">What it does</span></h2>
+      <div class="grid">
+        <div class="card"><h3>Inventory</h3><p>Warframes, weapons, mods, arcanes, parts and resources, with prices and where each mod is equipped.</p></div>
+        <div class="card"><h3>Relics</h3><p>Your relics with their rewards and plat value, plus a reward overlay during Void Fissures.</p></div>
+        <div class="card"><h3>Mastery</h3><p>What you still need for your next rank, and the fastest ways to get there.</p></div>
+        <div class="card"><h3>Rivens</h3><p>Search riven auctions, fair-price estimates, and alerts when a good riven is listed.</p></div>
+        <div class="card"><h3>Trading</h3><p>warframe.market prices, your orders, and an automatic trade log with profit stats.</p></div>
+        <div class="card"><h3>Arbitrations</h3><p>Schedule with community tier grades, alerts for good nodes and live run tracking.</p></div>
+        <div class="card"><h3>World timers</h3><p>Open-world cycles, Baro Ki'Teer, Steel Path incursions and weekly resets.</p></div>
+        <div class="card"><h3>Night City look</h3><p>A cyberpunk-style interface, or a classic sidebar layout if you prefer.</p></div>
+      </div>
+    </div>
+  </section>
+
+  <section id="safe">
+    <div class="wrap">
+      <h2 class="word"><span class="t">Is it safe?</span><span class="sub">What it touches</span></h2>
+      <ul class="safe">
+        <li><b>The inventory helper</b> opens the Warframe process read-only, finds your session string in memory and uses it only to request your own inventory from Warframe's official API. It never writes to game memory or injects anything, and the session string is never saved, logged or sent anywhere else.</li>
+        <li><b>Manual inventory updates:</b> choose this on first start (or later in Settings) and the helper only runs when you press Refresh.</li>
+        <li><b>EE.log:</b> the app reads Warframe's log file from disk to notice trades and mission events.</li>
+        <li><b>warframe.market:</b> if you sign in, the login token is stored encrypted on your PC. Your password is never saved.</li>
+        <li><b>Overlays</b> read the screen to show relic reward prices. They never click or send input to the game.</li>
+      </ul>
+      <p class="warn"><b>Use at your own risk.</b> ToxicFrame is a fan-made tool and is not affiliated with or endorsed by Digital Extremes. Every line of code is public, so you can check all of the above yourself.</p>
+    </div>
+  </section>
+
+  <section id="credits">
+    <div class="wrap">
+      <h2 class="word"><span class="t">Credits</span><span class="sub">Data sources</span></h2>
+      <div class="grid">
+        <div class="card"><h3>browse.wf</h3><p>Game data and images. <a href="https://browse.wf/about">browse.wf</a></p></div>
+        <div class="card"><h3>Warframe Wiki</h3><p>Icons, texts and syndicate wares. <a href="https://wiki.warframe.com">wiki.warframe.com</a></p></div>
+        <div class="card"><h3>warframe.market</h3><p>Prices and trading. <a href="https://warframe.market">warframe.market</a></p></div>
+        <div class="card"><h3>Arbitration Goons</h3><p>Arbitration tier grades. <a href="https://arbi.guide/">arbi.guide</a></p></div>
+        <div class="card"><h3>44bananas</h3><p>Riven roll sheet. <a href="https://docs.google.com/spreadsheets/d/1zbaeJBuBn44cbVKzJins_E3hTDpnmvOk8heYN-G8yy8">The sheet</a></p></div>
+      </div>
+    </div>
+  </section>
+
+  <footer>
+    <div class="wrap row">
+      <span>ToxicFrame is free software under the <a href="https://github.com/2Toxic4uu/ToxicFrame/blob/main/LICENSE">GPL-3.0-or-later</a> license.</span>
+      <span>Warframe and all related names and imagery are trademarks of Digital Extremes Ltd.</span>
+    </div>
+  </footer>
+</body>
+</html>
